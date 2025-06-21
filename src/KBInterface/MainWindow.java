@@ -424,7 +424,7 @@ private void configureSpinner() {
                 oos.writeObject(gKL.getKeyEvents());
             }
         }
-        catch (IOException e) {}
+        catch (IOException e) {e.printStackTrace();}
     }
     private void loadKeyEvents(File file)
     {
@@ -434,7 +434,7 @@ private void configureSpinner() {
             try (ObjectInputStream ois = new ObjectInputStream(fin)) {
                 gKL.setKeyEvents((List<KeyEvent>) ois.readObject());
             }
-        } catch (IOException | ClassNotFoundException e) {}
+        } catch (IOException | ClassNotFoundException e) {e.printStackTrace();}
         // TODO add your handling code here:
     }
     

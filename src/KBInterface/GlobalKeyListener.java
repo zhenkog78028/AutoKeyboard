@@ -18,15 +18,16 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.List;
 import java.awt.event.KeyEvent;
 import javax.swing.SwingUtilities;
+import java.io.Serializable;
 
-public class GlobalKeyListener implements NativeKeyListener { //main keylistener using JNativeHook which provides the arraylist for the main method
+public class GlobalKeyListener implements NativeKeyListener, Serializable { //main keylistener using JNativeHook which provides the arraylist for the main method
     // uses KBKeyAdapter to convert JNativeHook NativeKeyEvents to AWT KeyEvents
     
     //private  List<KeyEventEntry> keyEventList = new CopyOnWriteArrayList<>();
-    private List<KeyEvent> keyEventList = new CopyOnWriteArrayList<>();
-    private  volatile boolean listening;
-    private final KBKeyAdapter KBKA;
-    private MainWindow mainWindow;
+    private List<KeyEvent> keyEventList = new EventList<>();
+    private transient volatile boolean listening;
+    private transient final KBKeyAdapter KBKA;
+    private transient MainWindow mainWindow;
     public  void setListening(boolean state) {
         listening = state;
     }
@@ -120,11 +121,16 @@ public class GlobalKeyListener implements NativeKeyListener { //main keylistener
                 KBKA = new KBKeyAdapter(this);
 		GlobalScreen.addNativeKeyListener(this); // Netbeans warns that this code isn't good, TODO: figure out how to clean up
 	}
+        
+        public class EventList<T> extends CopyOnWriteArrayList implements Serializable
+        {
+            
+        }
         /*public static class KeyEventEntry implements Serializable {
         private static final long serialVersionUID = 1L;
         public final int keyCode;
         public final int eventType; // KeyEvent.KEY_PRESSED or KEY_RELEASED
-        public final Instant timestamp;
+        public final Instant timestamp;timestamp
 
         public KeyEventEntry(int keyCode, int eventType, Instant timestamp) {
             this.keyCode = keyCode;
