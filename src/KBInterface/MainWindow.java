@@ -26,6 +26,7 @@ public class MainWindow extends javax.swing.JFrame {
     private Thread KBPlayer;
     //private SpinnerListModel msValues;
     private final GlobalKeyListener gKL;
+    private boolean instant;
     //private KBKeyAdapter KBKA;
     /**
      * Creates new form MainWindow
@@ -42,6 +43,7 @@ public class MainWindow extends javax.swing.JFrame {
 
         listening = false;
         playing = false;
+        instant = false;
         //String[] ms = {"0","50","100","250","500","1000"};
         //int[] ms = {0,50,100,250,500,1000};
         //msValues = new SpinnerNumberModel(0,50,100,250,500,1000);
@@ -72,6 +74,7 @@ public class MainWindow extends javax.swing.JFrame {
         delaySpinner = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        instantMode = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -127,6 +130,13 @@ public class MainWindow extends javax.swing.JFrame {
 
         jLabel2.setText("Playing hotkey: F8");
 
+        instantMode.setText("Spam mode");
+        instantMode.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                instantModeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -139,7 +149,8 @@ public class MainWindow extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(saveButton)
-                            .addComponent(loadButton)))
+                            .addComponent(loadButton)
+                            .addComponent(instantMode, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -176,7 +187,9 @@ public class MainWindow extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(saveButton)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(loadButton))
+                        .addComponent(loadButton)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(instantMode))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(18, Short.MAX_VALUE))
         );
@@ -301,6 +314,11 @@ private void configureSpinner() {
         System.exit(0);        // TODO add your handling code here:
     }//GEN-LAST:event_formWindowClosing
 
+    private void instantModeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_instantModeActionPerformed
+        instant = instantMode.isSelected();
+        // TODO add your handling code here:
+    }//GEN-LAST:event_instantModeActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -377,8 +395,8 @@ private void configureSpinner() {
                                 robot.keyRelease(keyCode);
                             }
                         }
-
-                        Thread.sleep(delay);
+                        
+                        if(!(instant)){Thread.sleep(delay);}
                     }
                     /*
 
@@ -501,6 +519,7 @@ private void configureSpinner() {
     private javax.swing.JFileChooser chooseFile;
     private javax.swing.JLabel delayLabel;
     private javax.swing.JSpinner delaySpinner;
+    private javax.swing.JCheckBox instantMode;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

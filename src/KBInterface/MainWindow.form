@@ -39,6 +39,7 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                           <Component id="loadButton" min="-2" max="-2" attributes="0"/>
+                          <Component id="instantMode" alignment="0" min="-2" pref="105" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -87,6 +88,8 @@
                       <Component id="saveButton" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="loadButton" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="instantMode" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane1" min="-2" pref="180" max="-2" attributes="0"/>
               </Group>
@@ -182,6 +185,14 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="Playing hotkey: F8"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JCheckBox" name="instantMode">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Spam mode"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="instantModeActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>
