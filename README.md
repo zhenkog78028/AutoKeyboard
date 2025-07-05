@@ -4,7 +4,7 @@ A quick tool that allows simple, repetitive keyboard tasks to be controlled via 
 
 ### Dependencies
 
-* JRE > 21
+* JRE >= 1.8
 
 
 ### Building
